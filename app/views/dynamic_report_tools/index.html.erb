@@ -1,0 +1,256 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+	
+	  <style>
+fieldset { margin-bottom: 1em; }
+input { display: block; margin-bottom: .25em; }
+#print-output {
+  width: 100%;
+}
+.print-output-line {
+  white-space: pre;
+  padding: 5px;
+  font-family: monaco, monospace;
+  font-size: .7em;
+}
+.vmenu{border:1px solid #aaa;position:absolute;background:#fff;	display:none;font-size:0.75em;}
+       .vmenu .first_li span{width:100px;display:block;padding:5px 10px;cursor:pointer}
+       .vmenu .inner_li{display:none;margin-left:120px;position:absolute;border:1px solid #aaa;
+        border-left:1px solid #ccc;margin-top:-28px;background:#fff;}
+       .vmenu .sep_li{border-top: 1px ridge #aaa;margin:5px 0}
+       .vmenu .fill_title{font-size:11px;font-weight:bold;/height:15px;/overflow:hidden;word-wrap:break-word;}
+
+</style>
+  
+<!-- import necessary libraries -->
+<meta charset="utf-8" />
+<!-- import necessary libraries -->
+<script src="http://www.google.com/jsapi" type="text/javascript">
+</script>
+<script type="text/javascript">
+   google.load("jquery", "1.3.2");
+   google.load("jqueryui", "1.7.3");
+</script>
+
+<%= javascript_include_tag "jquery.contextMenu" %>
+<!-- Include stylesheets -->
+<%= stylesheet_link_tag    "style", :media => "all" %>
+    
+    
+    <script>
+    $(document).ready(function () {
+    	var id_tmp
+    	$(document)[0].oncontextmenu = function() {return false;}
+    //Counter
+    counter = 0;
+    $(function() {
+    $(".drag").draggable({
+    	snap: true,
+        helper: 'clone',
+        containment: 'frame',
+        //When first dragged
+        stop: function (ev, ui) {
+            var pos = $(ui.helper).offset();
+            objName = "#clonediv" + counter
+            $(objName).css({
+                "left": pos.left,
+                "top": pos.top
+            });
+            $(objName).removeClass("drag");
+            //When an existiung object is dragged
+            $(objName).draggable({
+                containment: 'parent',
+                stop: function (ev, ui) {
+                    var pos = $(ui.helper).offset();
+                    console.log($(this).attr("id"));
+                    console.log(pos.left)
+                    console.log(pos.top)
+                    id_tmp = $(this).attr("id")
+                }
+                
+            });
+                    $(this).keydown(function (e) {
+              			if (e.which === 46) {
+               			e.preventDefault();
+              			}
+             		});
+        }
+    });
+    //Make element droppable
+    $("#frame").droppable({
+        drop: function (ev, ui) {
+            if (ui.helper.attr('id').search(/drag[0-9]/) != -1) {
+                counter++;
+                var element = $(ui.draggable).clone();
+                element.addClass("tempclass");
+                $(this).append(element);
+                $(".tempclass").attr("id", "clonediv" + counter);
+                id_tmp = $("#clonediv" + counter).attr("id")
+                $("#clonediv" + counter).removeClass("tempclass");
+                //Get the dynamically item id
+                draggedNumber = ui.helper.attr('id').search(/drag([0-9])/)
+                itemDragged = "dragged" + RegExp.$1
+                console.log(itemDragged)
+                $("#clonediv" + counter).addClass(itemDragged);
+            }
+        }
+        
+    });
+      $(window).keydown(function(e){
+             		
+             		
+    if(e.which === 46){ 
+    	//it's the delete key!
+    $("div[id="+id_tmp+"]").remove()
+    }
+});
+});
+
+
+// $('#rightclickarea').bind('contextmenu',function(e){
+$('#frame').bind('contextmenu',function(e){
+			var $cmenu = $(this).next();
+			$('<div class="overlay"></div>').css({left : '0px', top : '0px',position: 'absolute', width:                                                   '100%', height: '100%', zIndex: '100' }).click(function() {
+				$(this).remove();
+				$cmenu.hide();
+			}).bind('contextmenu' , function(){return false;}).appendTo(document.body);
+			$(this).next().css({ left: e.pageX, top: e.pageY, zIndex: '101' }).show();
+ 
+			return false;
+			 });
+ 
+			 $('.vmenu .first_li').live('click',function() {
+				if( $(this).children().size() == 1 ) {
+					alert($(this).children().text());
+					$('.vmenu').hide();
+					$('.overlay').hide();
+				}
+			 });
+ 
+			 $('.vmenu .inner_li span').live('click',function() {
+					alert($(this).text());
+					$(this).hide();
+					$('.vmenu').hide();
+					$('.overlay').hide();
+			 });
+ 
+ 
+			$(".first_li , .sec_li, .inner_li span").hover(function () {
+				$(this).css({backgroundColor : '#E0EDFE' , cursor : 'pointer'});
+			if ( $(this).children().size() >0 )
+					$(this).find('.inner_li').show();	
+					$(this).css({cursor : 'default'});
+			}, 
+			function () {
+				$(this).css('background-color' , '#fff' );
+				$(this).find('.inner_li').hide();
+			});
+			
+			
+		
+
+});
+
+
+
+    </script>
+    
+</head>
+
+<body>
+<div id="wrapper">
+  <div id="options">
+    <div id="drag1" class="drag">
+    </div>
+    
+    <!-- end of drag1 -->
+    <div id="drag2" class="drag">
+    </div>
+    <!-- end of drag2 -->
+    <div id="drag3" class="drag">
+    </div>
+    <!-- end of drag3 -->
+    <div id="drag4" class="drag">
+    </div>
+    <!-- end of drag4 -->
+    <div id="drag5" class="drag">
+    </div>
+    <!-- end of drag5 -->
+    <div id="drag6" class="drag">
+    </div>
+    <!-- end of drag6 -->
+  </div>
+  <!-- end of options -->
+  <div id="frame">  	
+  </div>
+  <div class="vmenu">
+ 	       <div class="first_li"><span>Open</span></div>
+	       <div class="first_li"><span>Open in new tab</span></div>
+                <div class="sep_li"></div>
+ 
+		<div class="first_li"><span>Quick Preview</span>
+			<div class="inner_li">
+				<span>Dossier</span> 
+				<span>Channel 1</span>
+				<span>Channel 2</span>
+			</div>
+		</div>
+ 
+		<div class="first_li"><span>Preview</span>
+         		<div class="inner_li">
+				<span>Channel 1</span>
+				<span>Channel 2 </span>
+			</div>
+		</div>
+ 
+		<div class="first_li"><span>Edit</span></div>
+		<div class="first_li"><span>Event Log</span></div>
+		<div class="sep_li"></div>
+		<div class="first_li"><span>New</span></div>
+		<div class="first_li"><span>Assignments</span>
+          		<div class="inner_li">
+	         		<span>Assignement 1</span>
+		        	<span>Assignement 2</span>
+			</div>
+		</div>
+ 
+		<div class="first_li"><span>Assets</span>
+			<div class="inner_li">
+				<span>Asset 1</span>
+				<span>Asset 2</span>
+				<span>All Assets</span>
+			</div>
+		</div>
+		<div class="first_li"><span>Preview</span></div>
+		<div class="sep_li"></div>
+		<div class="first_li"><span>Move to</span>
+			<div class="inner_li">
+        			<span>Folder name</span>
+			</div>
+		</div>
+ 
+        	<div class="first_li"><span>Others</span>
+			<div class="inner_li">
+				<span>Mark as Read</span>
+				<span>Mark as Unread</span>
+                       		<span>Trash</span>
+				<span>Archieve</span>
+			        <span>Commite</span>
+				<span>Release</span>
+			</div>
+		</div>
+	</div>
+  <!-- end of frame -->
+</div>
+<!-- end of wrapper -->
+
+
+	
+	
+	
+</body>
+
+
+</html>
