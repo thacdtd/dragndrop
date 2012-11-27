@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/draw-tool/!svn/ver/3/dynamic_report/db
+END
+development.sqlite3
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/draw-tool/!svn/ver/3/dynamic_report/db/development.sqlite3
+END
+seeds.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/draw-tool/!svn/ver/3/dynamic_report/db/seeds.rb
+END

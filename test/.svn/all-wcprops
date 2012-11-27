@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/draw-tool/!svn/ver/3/dynamic_report/test
+END
+test_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/draw-tool/!svn/ver/3/dynamic_report/test/test_helper.rb
+END

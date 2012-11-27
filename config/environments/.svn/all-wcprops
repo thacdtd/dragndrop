@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/draw-tool/!svn/ver/3/dynamic_report/config/environments
+END
+test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/draw-tool/!svn/ver/3/dynamic_report/config/environments/test.rb
+END
+development.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/draw-tool/!svn/ver/3/dynamic_report/config/environments/development.rb
+END
+production.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/draw-tool/!svn/ver/3/dynamic_report/config/environments/production.rb
+END
