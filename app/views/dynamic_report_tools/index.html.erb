@@ -40,7 +40,7 @@ input { display: block; margin-bottom: .25em; }
     
     
     <script>
-    $(document).ready(function () {
+   $(document).ready(function () {
     	var id_tmp = ""
     	$(document)[0].oncontextmenu = function() {return false;}
     //Counter
@@ -61,10 +61,21 @@ input { display: block; margin-bottom: .25em; }
             });
             var incW = 32
             var incH = 32
+            id_tmp = $(objName).attr("id");
+            	$("#item_id").val(id_tmp);
+				$("#name").val($(this).html());
+				$("#height").val($(this).height());
+				$("#width").val($(this).width());
+				$("#border").val($(this).css('borderWidth'));
             //id_tmp = $(objName).attr("id");
             $(objName).click(function(){
 				//$(objName).focus();
 				id_tmp = $(this).attr("id");
+				$("#item_id").val(id_tmp);
+				$("#name").val($(this).html());
+				$("#height").val($(this).height());
+				$("#width").val($(this).width());
+				$("#border").val($(this).css('borderWidth'));
 			});
 			
 			incW = $("div[id="+id_tmp+"]").width();
@@ -80,30 +91,39 @@ input { display: block; margin-bottom: .25em; }
 					
 					if(e.which === 39){
 						//it's the left arrow key!
-						incW = incW + 32;
+						incW = incW + 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
+						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
 					if(e.which === 37){ 
 						//it's the left arrow key!
-						incW = incW - 32;
+						incW = incW - 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
+						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
 					
 					if(e.which === 38){ 
 						//it's the left arrow key!
-						incH = incH + 32;
+						incH = incH + 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
+						$("#height").val($("div[id="+id_tmp+"]").height());
 					}
 					if(e.which === 40){ 
 						//it's the left arrow key!
-						incH = incH - 32;
+						incH = incH - 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
+						$("#height").val($("div[id="+id_tmp+"]").height());
 					}
 				});
             $(objName).removeClass("drag");
             //When an existing object is dragged
             $(objName).draggable({
             	snap: true,
+            	// $(window).keydown(function(e){
+            		// if(e.which === 65){ 
+            			// helper: 'clone',
+            		// }
+            	// });
                 containment: 'parent',
                 stop: function (ev, ui) {
                     var pos = $(ui.helper).offset();
@@ -112,39 +132,36 @@ input { display: block; margin-bottom: .25em; }
                     console.log(pos.top)
                     var incW1 = $(this).width();
             		var incH1 = $(this).height();
-                    //id_tmp = $(this).attr("id");
-                    $(objName).click(function(){
-						$(this).focus();
-						id_tmp = $(this).attr("id");
-						incW = $("div[id="+id_tmp+"]").width();
-					});
 					$(window).keydown(function(e){
-						//id_tmp = $(this).attr("id");	
 						if(e.which === 46){ 
 							//it's the delete key!
-							$(this).remove()
+							$("div[id="+id_tmp+"]").remove();
 						}
 						
 						if(e.which === 39){
 							//it's the left arrow key!
-							incW1 = incW1 + 32;
+							incW1 = incW1 + 1;
 							$("div[id="+id_tmp+"]").css("width", incW1 + "px");
+							$("#width").val($("div[id="+id_tmp+"]").width());
 						}
 						if(e.which === 37){ 
 							//it's the left arrow key!
-							incW1 = incW1 - 32;
+							incW1 = incW1 - 1;
 							$("div[id="+id_tmp+"]").css("width", incW1+ "px");
+							$("#width").val($("div[id="+id_tmp+"]").width());
 						}
 						
 						if(e.which === 38){ 
 							//it's the left arrow key!
-							incH1 = incH1 + 32;
+							incH1 = incH1 + 1;
 							$("div[id="+id_tmp+"]").css("height", incH1 + "px");
+							$("#height").val($("div[id="+id_tmp+"]").height());
 						}
 						if(e.which === 40){ 
 							//it's the left arrow key!
-							incH1 = incH1 - 32;
+							incH1 = incH1 - 1;
 							$("div[id="+id_tmp+"]").css("height", incH1 + "px");
+							$("#height").val($("div[id="+id_tmp+"]").height());
 						}
 					});
                 }
@@ -178,8 +195,130 @@ input { display: block; margin-bottom: .25em; }
 			// $("div[id="+id_tmp+"]").remove()
 		// }
 	// });
+	
+$("#set_properties").click(function(){
+	var item_id = $("#item_id").val();
+	$("div[id="+item_id+"]").html($("#name").val());
+	$("div[id="+item_id+"]").attr("align", $("#align").val());
+	$("div[id="+item_id+"]").css("width", $("#width").val() + "px");
+	$("div[id="+item_id+"]").css("height", $("#height").val() + "px");
+	$("div[id="+item_id+"]").css("border", $("#border").val() +" solid black");
+	// $("#item_id").val(id_tmp);
+	// $("#height").val($(this).height());
+	// $("#width").val($(this).width());
+	// $("#border").val($(this).css('borderWidth'));
 });
+	
+	
+    
+//});// document ready
 
+var tmp_div = ""
+var p = ""
+var copy_count = 0
+$(document).keydown(function(event){
+	//ctl + c
+        if(event.keyCode==67 && event.ctrlKey){
+                // your ctrl-c code
+                var _id = $("#item_id").val();
+                p = $("div[id="+_id+"]");
+                tmp_div = p.clone();
+                //alert(tmp_div.attr("class"))
+        }
+	//ctl + v
+        if(event.keyCode==86 && event.ctrlKey){
+                // your ctrl-v code
+               //counter++;
+               tmp_div.attr("id", "copy_div" + copy_count);
+               //Get
+				copy_count++;
+				var offset = p.offset();
+				//set
+				//tmp_div.offset({ top: offset.top + 20, left: offset.left})
+               tmp_div.insertAfter(p);
+               tmp_div.offset({ top: offset.top + 20, left: offset.left })
+               $(tmp_div).draggable({
+            	snap: true,
+            	// $(window).keydown(function(e){
+            		// if(e.which === 65){ 
+            			// helper: 'clone',
+            		// }
+            	// });
+                containment: 'frame',
+                stop: function (ev, ui) {
+                    var pos = $(ui.helper).offset();
+                    console.log($(this).attr("id"));
+                    console.log(pos.left)
+                    console.log(pos.top)
+                    id_tmp = $(tmp_div).attr("id");
+            	$("#item_id").val(id_tmp);
+				$("#name").val($(this).html());
+				$("#height").val($(this).height());
+				$("#width").val($(this).width());
+				$("#border").val($(this).css('borderWidth'));
+               $(tmp_div).click(function(){
+				//$(objName).focus();
+				id_tmp = $(this).attr("id");
+				$("#item_id").val(id_tmp);
+				$("#name").val($(this).html());
+				$("#height").val($(this).height());
+				$("#width").val($(this).width());
+				$("#border").val($(this).css('borderWidth'));
+			});
+			
+			incW = $("div[id="+id_tmp+"]").width();
+				incH = $("div[id="+id_tmp+"]").height();
+			$(window).keydown(function(e){
+				
+					//id_tmp = $(this).attr("id");	
+					if(e.which === 46){
+						
+						//it's the delete key!
+						$("div[id="+id_tmp+"]").remove();
+					}
+					
+					if(e.which === 39){
+						//it's the left arrow key!
+						incW = incW + 1;
+						$("div[id="+id_tmp+"]").css("width", incW + "px");
+						$("#width").val($("div[id="+id_tmp+"]").width());
+					}
+					if(e.which === 37){ 
+						//it's the left arrow key!
+						incW = incW - 1;
+						$("div[id="+id_tmp+"]").css("width", incW + "px");
+						$("#width").val($("div[id="+id_tmp+"]").width());
+					}
+					
+					if(e.which === 38){ 
+						//it's the left arrow key!
+						incH = incH + 1;
+						$("div[id="+id_tmp+"]").css("height", incH + "px");
+						$("#height").val($("div[id="+id_tmp+"]").height());
+					}
+					if(e.which === 40){ 
+						//it's the left arrow key!
+						incH = incH - 1;
+						$("div[id="+id_tmp+"]").css("height", incH + "px");
+						$("#height").val($("div[id="+id_tmp+"]").height());
+					}
+				});
+				$(tmp_div).removeClass("drag");
+				}
+            });
+               
+                //id_tmp = $("#clonediv" + counter).attr("id")
+                
+                // $("#clonediv" + counter).removeClass("tempclass");
+                //Get the dynamically item id
+                //draggedNumber = ui.helper.attr('id').search(/drag([0-9])/)
+                //itemDragged = "dragged" + RegExp.$1
+                //console.log(itemDragged)
+                //$("#clonediv" + counter).addClass(itemDragged);
+               
+                // alert("ctl + v")
+        }
+});
 
 // $('#rightclickarea').bind('contextmenu',function(e){
 $('#frame').bind('contextmenu',function(e){
@@ -220,6 +359,8 @@ $('#frame').bind('contextmenu',function(e){
 				$(this).find('.inner_li').hide();
 			});
 });
+
+});				
 	</script>
 </head>
 
@@ -245,9 +386,34 @@ $('#frame').bind('contextmenu',function(e){
     <div id="drag6" class="drag">
     </div>
     <!-- end of drag6 -->
+    <br />
+    <div id="properties" class="">
+    	<div style = "text-align: center; border:1px solid black;"> 
+    	 <h3>
+    	 	Properties
+    	 </h3>
+    	</div>
+    	
+    	<div>
+    		<label for="item_id">ID</label>
+    		<input type="text" name="item_id" id="item_id" value="item_id">
+    		<label for="name">Name</label>
+    		<input type="text" name="name" id="name" value="name">
+    		<label for="align">Text align</label>
+    		<input type="text" name="align" id="align" value="left">
+    		<label for="width">Width</label>
+    		<input type="text" name="width" id="width" value="0">
+    		<label for="height">Height</label>
+    		<input type="text" name="height" id="height" value="0">
+    		<label for="border">Border</label>
+    		<input type="text" name="border" id="border" value="0">
+    		<button type="button" id="set_properties" align="right">Ok</button>
+    	</div>
+    </div>
   </div>
   <!-- end of options -->
 	<div id="frame">
+		<div id = "cp_div"> </div>
 	</div>
 	<div class="vmenu">
 			<div class="first_li"><span>Open</span></div>

@@ -47,7 +47,8 @@ body {
 #drag1 {
 	margin-left:15px;
 	margin-top:15px;
-	background-image: url("images/cf_32x32.png");
+	background-color:#CCCCCC;
+	/*background-image: url("images/cf_32x32.png");*/
 	width:32px;
 	height:32px;
 }
@@ -112,7 +113,8 @@ body {
 /* classes for dragged stuff */
 .dragged1 {
 	position:absolute;
-	background-image: url("images/cf_32x32.png");
+	background-color:#CCCCCC;
+	/*background-image: url("images/cf_32x32.png");*/
 	width:32px;
 	height:32px;
 }
