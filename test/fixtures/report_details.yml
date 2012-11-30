@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  detail_class: MyString
+  detail_value: MyString
+  top: 1
+  left: 1
+  width: 1
+  height: 1
+  item_code: MyString
+  DB_table: MyString
+  DB_field: MyString
+  format: MyString
+  top_border: MyString
+  right_border: MyString
+  bottom_border: MyString
+  left_border: MyString
+
+two:
+  detail_class: MyString
+  detail_value: MyString
+  top: 1
+  left: 1
+  width: 1
+  height: 1
+  item_code: MyString
+  DB_table: MyString
+  DB_field: MyString
+  format: MyString
+  top_border: MyString
+  right_border: MyString
+  bottom_border: MyString
+  left_border: MyString

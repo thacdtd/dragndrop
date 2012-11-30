@@ -10,7 +10,7 @@ body {
 
 #options{
 	width: 200px;
-	height:700px;
+	height:900px;
 	border:1px solid black;
 	float:left;
 }
@@ -18,7 +18,7 @@ body {
 
 #frame{
 	width:990px;
-	height:700px;
+	height:900px;
 	/*background-image: url("../images/UK-Map.gif");*/
 	background-repeat: repeat-y;
     	background-position: 0 0;
@@ -49,32 +49,41 @@ body {
 	margin-top:15px;
 	background-color:#CCCCCC;
 	/*background-image: url("images/cf_32x32.png");*/
-	width:32px;
-	height:32px;
+	width:70px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	text-align: center;
+	cursor:pointer;
 }
 
 #drag2 {
 	margin-left:15px;
 	margin-top:15px;
-	background-image: url("images/dw_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/dw_32x32.png");*/
+	width:300px;
+	height:40px;
+	cursor:pointer;
+	font-size:40px;
 }
 
 #drag3 {
 	margin-left:15px;
 	margin-top:15px;
-	background-image: url("images/fla_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/fla_32x32.png");*/
+	width:100px;
+	height:20px;
+	font-weight:bold;
+	cursor:pointer;
 }
 
 #drag4 {
 	margin-left:15px;
 	margin-top:15px;
-	background-image: url("images/flex_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/flex_32x32.png");*/
+	width:70px;
+	height:20px;
+	cursor:pointer;
 }
 
 #drag5 {
@@ -115,29 +124,38 @@ body {
 	position:absolute;
 	background-color:#CCCCCC;
 	/*background-image: url("images/cf_32x32.png");*/
-	width:32px;
-	height:32px;
+	width:70px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	text-align: center;
+	cursor:pointer;
 }
 
 .dragged2 {
 	position:absolute; 
-	background-image: url("images/dw_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/dw_32x32.png");*/
+	width:300px;
+	height:40px;
+	cursor:pointer;
+	font-size:40px;
 }
 
 .dragged3 {
 	position:absolute; 
-	background-image: url("images/fla_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/fla_32x32.png");*/
+	width:100px;
+	height:20px;
+	font-weight:bold;
+	cursor:pointer;
 }
 
 .dragged4 {
 	position:absolute; 
-	background-image: url("images/flex_32x32.png");
-	width:32px;
-	height:32px;
+	/*background-image: url("images/flex_32x32.png");*/
+	width:70px;
+	height:20px;
+	cursor:pointer;
 }
 
 .dragged5 {
@@ -158,3 +176,23 @@ body {
 #element{
 	border:1px solid red
 }
+
+.top-solid{border-top: 1px solid #000000;}
+.right-solid{border-right: 1px solid #000000;}
+.bottom-solid{border-bottom: 1px solid #000000;}
+.left-solid{border-left: 1px solid #000000;}
+
+.top-bold{border-top: 2px solid #000000;}
+.right-bold{border-right: 2px solid #000000;}
+.bottom-bold{border-bottom: 2px solid #000000;}
+.left-bold{border-left: 2px solid #000000;}
+
+.top-dotted{border-top: 1px dotted #000000;}
+.right-dotted{border-right: 1px dotted #000000;}
+.bottom-dotted{border-bottom: 1px dotted #000000;}
+.left-dotted{border-left: 1px dotted #000000;}
+
+.top-none{border-top:none;}
+.right-none{border-right:none;}
+.bottom-none{border-bottom:none;}
+.left-none{border-left:none;}

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  report_name: MyString
+  page_class: MyString
+  left_align: 1
+  right_align: 1
+  top_align: 1
+  bottom_align: 1
+
+two:
+  report_name: MyString
+  page_class: MyString
+  left_align: 1
+  right_align: 1
+  top_align: 1
+  bottom_align: 1

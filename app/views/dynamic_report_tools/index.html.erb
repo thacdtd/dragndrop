@@ -39,13 +39,12 @@ input { display: block; margin-bottom: .25em; }
 <%= stylesheet_link_tag    "style", :media => "all" %>
     
     
-    <script>
-   $(document).ready(function () {
-    	var id_tmp = ""
-    	$(document)[0].oncontextmenu = function() {return false;}
-    //Counter
-    counter = 0;
-    $(function() {
+<script>
+var id_tmp = ""
+$(document)[0].oncontextmenu = function() {return false;}
+	//Counter
+counter = 0;
+$(function() {
     $(".drag").draggable({
     	snap: true,
         helper: 'clone',
@@ -63,26 +62,36 @@ input { display: block; margin-bottom: .25em; }
             var incH = 32
             id_tmp = $(objName).attr("id");
             	$("#item_id").val(id_tmp);
-				$("#name").val($(this).html());
+            	// $("#name").val($(this).html());
+            	$("#name").val($(this).find(".name").text());
+				$("#DB_table").val($(this).find(".DB_table").val());
+				$("#DB_field").val($(this).find(".DB_field").val());
 				$("#height").val($(this).height());
 				$("#width").val($(this).width());
-				$("#border").val($(this).css('borderWidth'));
-            //id_tmp = $(objName).attr("id");
+				$("#align").val($(this).css('text-align'));
+				$("#border_top").val($(this).css('borderTop'));
+				$("#border_right").val($(this).css('borderRight'));
+				$("#border_bottom").val($(this).css('borderBottom'));
+				$("#border_left").val($(this).css('borderLeft'));
             $(objName).click(function(){
-				//$(objName).focus();
 				id_tmp = $(this).attr("id");
 				$("#item_id").val(id_tmp);
-				$("#name").val($(this).html());
+				// $("#name").val($(this).html());
+				$("#name").val($(this).find(".name").text());
+				$("#DB_table").val($(this).find(".DB_table").val());
+				$("#DB_field").val($(this).find(".DB_field").val());
 				$("#height").val($(this).height());
 				$("#width").val($(this).width());
-				$("#border").val($(this).css('borderWidth'));
+				$("#align").val($(this).css('text-align'));
+				$("#border_top").val($(this).css('borderTop'));
+				$("#border_right").val($(this).css('borderRight'));
+				$("#border_bottom").val($(this).css('borderBottom'));
+				$("#border_left").val($(this).css('borderLeft'));
 			});
 			
 			incW = $("div[id="+id_tmp+"]").width();
 				incH = $("div[id="+id_tmp+"]").height();
 			$(window).keydown(function(e){
-				
-					//id_tmp = $(this).attr("id");	
 					if(e.which === 46){
 						
 						//it's the delete key!
@@ -119,11 +128,6 @@ input { display: block; margin-bottom: .25em; }
             //When an existing object is dragged
             $(objName).draggable({
             	snap: true,
-            	// $(window).keydown(function(e){
-            		// if(e.which === 65){ 
-            			// helper: 'clone',
-            		// }
-            	// });
                 containment: 'parent',
                 stop: function (ev, ui) {
                     var pos = $(ui.helper).offset();
@@ -189,30 +193,21 @@ input { display: block; margin-bottom: .25em; }
         }
         
     });
-	// $(window).keydown(function(e){	
-		// if(e.which === 46){ 
-			// //it's the delete key!
-			// $("div[id="+id_tmp+"]").remove()
-		// }
-	// });
 	
 $("#set_properties").click(function(){
 	var item_id = $("#item_id").val();
-	$("div[id="+item_id+"]").html($("#name").val());
-	$("div[id="+item_id+"]").attr("align", $("#align").val());
+	$("div[id="+item_id+"]").find(".name").html($("#name").val());
+	$("div[id="+item_id+"]").css("text-align", $("#align").val());
 	$("div[id="+item_id+"]").css("width", $("#width").val() + "px");
 	$("div[id="+item_id+"]").css("height", $("#height").val() + "px");
-	$("div[id="+item_id+"]").css("border", $("#border").val() +" solid black");
-	// $("#item_id").val(id_tmp);
-	// $("#height").val($(this).height());
-	// $("#width").val($(this).width());
-	// $("#border").val($(this).css('borderWidth'));
+	$("div[id="+item_id+"]").css("borderTop", $("#border_top").val());
+	$("div[id="+item_id+"]").css("borderRight", $("#border_right").val());
+	$("div[id="+item_id+"]").css("borderBottom", $("#border_bottom").val());
+	$("div[id="+item_id+"]").css("borderLeft", $("#border_left").val());
+	$("div[id="+item_id+"]").find(".DB_table").val($("#DB_table").val());
+	$("div[id="+item_id+"]").find(".DB_field").val($("#DB_field").val());
+	$("div[id="+item_id+"]").find(".count_num").val($("#count_num").val());
 });
-	
-	
-    
-//});// document ready
-
 var tmp_div = ""
 var p = ""
 var copy_count = 0
@@ -223,27 +218,19 @@ $(document).keydown(function(event){
                 var _id = $("#item_id").val();
                 p = $("div[id="+_id+"]");
                 tmp_div = p.clone();
-                //alert(tmp_div.attr("class"))
         }
 	//ctl + v
         if(event.keyCode==86 && event.ctrlKey){
                 // your ctrl-v code
-               //counter++;
                tmp_div.attr("id", "copy_div" + copy_count);
                //Get
 				copy_count++;
 				var offset = p.offset();
 				//set
-				//tmp_div.offset({ top: offset.top + 20, left: offset.left})
                tmp_div.insertAfter(p);
                tmp_div.offset({ top: offset.top + 20, left: offset.left })
                $(tmp_div).draggable({
             	snap: true,
-            	// $(window).keydown(function(e){
-            		// if(e.which === 65){ 
-            			// helper: 'clone',
-            		// }
-            	// });
                 containment: 'frame',
                 stop: function (ev, ui) {
                     var pos = $(ui.helper).offset();
@@ -252,18 +239,29 @@ $(document).keydown(function(event){
                     console.log(pos.top)
                     id_tmp = $(tmp_div).attr("id");
             	$("#item_id").val(id_tmp);
-				$("#name").val($(this).html());
+				$("#name").val($(this).find(".name").text());
+				$("#DB_table").val($(this).find(".DB_table").val());
+				$("#DB_field").val($(this).find(".DB_field").val());
 				$("#height").val($(this).height());
 				$("#width").val($(this).width());
-				$("#border").val($(this).css('borderWidth'));
+				$("#align").val($(this).css('text-align'));
+				$("#border_top").val($(this).css('borderTopWidth'));
+				$("#border_right").val($(this).css('borderRightWidth'));
+				$("#border_bottom").val($(this).css('borderBottomWidth'));
+				$("#border_left").val($(this).css('borderLeftWidth'));
                $(tmp_div).click(function(){
 				//$(objName).focus();
 				id_tmp = $(this).attr("id");
-				$("#item_id").val(id_tmp);
-				$("#name").val($(this).html());
+				$("#name").val($(this).find(".name").text());
+				$("#DB_table").val($(this).find(".DB_table").val());
+				$("#DB_field").val($(this).find(".DB_field").val());
 				$("#height").val($(this).height());
 				$("#width").val($(this).width());
-				$("#border").val($(this).css('borderWidth'));
+				$("#align").val($(this).css('text-align'));
+				$("#border_top").val($(this).css('borderTopWidth'));
+				$("#border_right").val($(this).css('borderRightWidth'));
+				$("#border_bottom").val($(this).css('borderBottomWidth'));
+				$("#border_left").val($(this).css('borderLeftWidth'));
 			});
 			
 			incW = $("div[id="+id_tmp+"]").width();
@@ -306,17 +304,6 @@ $(document).keydown(function(event){
 				$(tmp_div).removeClass("drag");
 				}
             });
-               
-                //id_tmp = $("#clonediv" + counter).attr("id")
-                
-                // $("#clonediv" + counter).removeClass("tempclass");
-                //Get the dynamically item id
-                //draggedNumber = ui.helper.attr('id').search(/drag([0-9])/)
-                //itemDragged = "dragged" + RegExp.$1
-                //console.log(itemDragged)
-                //$("#clonediv" + counter).addClass(itemDragged);
-               
-                // alert("ctl + v")
         }
 });
 
@@ -359,61 +346,128 @@ $('#frame').bind('contextmenu',function(e){
 				$(this).find('.inner_li').hide();
 			});
 });
+	
+$(document).ready(function () {
+$("#export").click(function(){
+	var count_id = 0
+	$("div").each(function (i) {
+        	if ((this.id.indexOf("clonediv") >= 0) || (this.id.indexOf("copy_div") >= 0)){
+        		//this.style.color = "blue";
+        		
+        		var _data = ""
+        		var name = $(this).find(".name").text()
+        		var top = $(this).offset().left
+        		var left = $(this).offset().top
+        		var width = $(this).width()
+        		var height = $(this).height()
+        		var borderTopWidth =$(this).css('borderTop')
+        		var borderRightWidth =$(this).css('borderRight')
+        		var borderBottomWidth =$(this).css('borderBottom')
+        		var borderLeftWidth =$(this).css('borderLeft')
+        		var DB_table = $(this).find(".DB_table").val()
+        		var DB_field = $(this).find(".DB_field").val()
+        		var count_num = $(this).find(".count_num").val()
+        		_data = _data + name+  ",," + left+  ",,"+ top +  ",," + width +  ",," + height+  ",," + borderTopWidth+  ",," + borderRightWidth+  ",," + borderBottomWidth+  ",," + borderLeftWidth +  ",," + DB_table +  ",," + DB_field+  ",," + count_num;
+        		
+        		$.ajax({
+            url: '/file_writes?data=' + _data,
+            // dataType: 'JSON',
+            type: 'GET',
+	        error: function(){
+	        	var errrrr = 'Errrorrrr!';
+		      	alert(errrrr);
+		      },
+            success: function() {
+                alert("Export successfully!") 	
+            }
+        });
+        	count_id++;
+        	}
+         	
+      });
+      return false;
+});
 
-});				
+});
 	</script>
 </head>
 
 <body>
 <div id="wrapper">
   <div id="options">
-    <div id="drag1" class="drag">
-    </div>
+
     
     <!-- end of drag1 -->
-    <div id="drag2" class="drag">
+    <div id="drag2" class="drag" value="Title">
+    	<span class="name">Title</span>
+    	<input type="hidden" class="count_num" value="count_num">
+    	<input type="hidden" class="DB_table" value="DB_table">
+    	<input type="hidden" class="DB_field" value="DB_field">
     </div>
     <!-- end of drag2 -->
+    
+     <div id="drag1" class="drag">
+     	<span class="name">label</span>
+     	<input type="hidden" class="count_num" value="count_num">
+	     <input type="hidden" class="DB_table" value="DB_table">
+	     <input type="hidden" class="DB_field" value="DB_field">
+     </div>
+    
     <div id="drag3" class="drag">
+    	<span class="name">Name label</span>
+    	<input type="hidden" class="count_num" value="count_num">
+    	<input type="hidden" class="DB_table" value="DB_table">
+    	<input type="hidden" class="DB_field" value="DB_field">
     </div>
     <!-- end of drag3 -->
     <div id="drag4" class="drag">
+    	<span class="name">Name</span>
+    	<input type="hidden" class="count_num" value="count_num">
+    	<input type="hidden" class="DB_table" value="DB_table">
+    	<input type="hidden" class="DB_field" value="DB_field">
     </div>
     <!-- end of drag4 -->
-    <div id="drag5" class="drag">
-    </div>
-    <!-- end of drag5 -->
-    <div id="drag6" class="drag">
-    </div>
-    <!-- end of drag6 -->
     <br />
-    <div id="properties" class="">
-    	<div style = "text-align: center; border:1px solid black;"> 
-    	 <h3>
+    <div id="properties">
+    	<hr />
+    	<div style = "text-align: center; height: 20px;"> 
     	 	Properties
-    	 </h3>
     	</div>
-    	
+    	<hr />
     	<div>
-    		<label for="item_id">ID</label>
-    		<input type="text" name="item_id" id="item_id" value="item_id">
+    		<label for="item_id">ID</label><input type="text" name="item_id" id="item_id" value="item_id"  style="text-align: right; ">
     		<label for="name">Name</label>
-    		<input type="text" name="name" id="name" value="name">
+    		<input type="text" name="name" id="name" value="name" style="text-align: right; ">
     		<label for="align">Text align</label>
-    		<input type="text" name="align" id="align" value="left">
+    		<input type="text" name="align" id="align" value="left" style="text-align: right; ">
     		<label for="width">Width</label>
-    		<input type="text" name="width" id="width" value="0">
+    		<input type="text" name="width" id="width" value="0" style="text-align: right; ">
     		<label for="height">Height</label>
-    		<input type="text" name="height" id="height" value="0">
-    		<label for="border">Border</label>
-    		<input type="text" name="border" id="border" value="0">
-    		<button type="button" id="set_properties" align="right">Ok</button>
+    		<input type="text" name="height" id="height" value="0" style="text-align: right; ">
+    		<label for="border_top">Border Top</label>
+    		<input type="text" name="border_top" id="border_top" value="0" style="text-align: right; ">
+    		<label for="border_right">Border Right</label>
+    		<input type="text" name="border_right" id="border_right" value="0" style="text-align: right; ">
+    		<label for="border_bottom">Border Bottom</label>
+    		<input type="text" name="border_bottom" id="border_bottom" value="0" style="text-align: right; ">
+    		<label for="border_left">Border Left</label>
+    		<input type="text" name="border_left" id="border_left" value="0" style="text-align: right; ">
+    		<label for="count_num">Header</label>
+    		<input type="text" name="count_num" id="count_num" value="0" style="text-align: right; ">
+    		<label for="DB_table">DB Table</label>
+    		<input type="text" name="DB_table" id="DB_table" value="DB_table" style="text-align: right; ">
+    		<label for="DB_field">DB Field</label>
+    		<input type="text" name="DB_field" id="DB_field" value="DB_field" style="text-align: right; ">
+    		<button type="button" id="set_properties">Ok</button>
     	</div>
+    	<hr />
+    	
+    	<button type="button" id="export" align="right">Export</button>
     </div>
   </div>
   <!-- end of options -->
 	<div id="frame">
-		<div id = "cp_div"> </div>
+		
 	</div>
 	<div class="vmenu">
 			<div class="first_li"><span>Open</span></div>
