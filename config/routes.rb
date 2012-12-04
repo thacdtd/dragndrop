@@ -57,4 +57,6 @@ DynamicReport::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   resources :dynamic_report_tools
   resources :file_writes
+  
+  delete "file_writes/delete",:controller=>"file_writes", :as => :file_writes
 end

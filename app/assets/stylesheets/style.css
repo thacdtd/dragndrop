@@ -61,7 +61,7 @@ body {
 	margin-left:15px;
 	margin-top:15px;
 	/*background-image: url("images/dw_32x32.png");*/
-	width:300px;
+	width:100px;
 	height:40px;
 	cursor:pointer;
 	font-size:40px;
@@ -135,7 +135,7 @@ body {
 .dragged2 {
 	position:absolute; 
 	/*background-image: url("images/dw_32x32.png");*/
-	width:300px;
+	width:100px;
 	height:40px;
 	cursor:pointer;
 	font-size:40px;

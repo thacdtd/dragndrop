@@ -350,6 +350,19 @@ $('#frame').bind('contextmenu',function(e){
 $(document).ready(function () {
 $("#export").click(function(){
 	var count_id = 0
+	//delete old report details
+	$.ajax({
+            url: '/file_writes/delete',
+            // dataType: 'JSON',
+            type: 'delete',
+	        error: function(){
+	        	var errrrr = 'Erersds';
+		      	alert(errrrr);
+		      },
+            success: function() {
+                alert("Delete successfully!") 	
+            }
+        });
 	$("div").each(function (i) {
         	if ((this.id.indexOf("clonediv") >= 0) || (this.id.indexOf("copy_div") >= 0)){
         		//this.style.color = "blue";
@@ -437,7 +450,7 @@ $("#export").click(function(){
     	<div>
     		<label for="item_id">ID</label><input type="text" name="item_id" id="item_id" value="item_id"  style="text-align: right; ">
     		<label for="name">Name</label>
-    		<input type="text" name="name" id="name" value="name" style="text-align: right; ">
+    		<input type="text" name="name" id="name" value="name" style="text-align: left; ">
     		<label for="align">Text align</label>
     		<input type="text" name="align" id="align" value="left" style="text-align: right; ">
     		<label for="width">Width</label>
