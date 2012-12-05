@@ -29,6 +29,7 @@ class Services::ReportDetailService
       _report_detail.DB_table = arr[9]
       _report_detail.DB_field = arr[10]
       _report_detail.count_num = arr[11]
+      _report_detail.item_code = arr[12]
       _report_detail.report_id = 1
       _report_detail.save()
     end

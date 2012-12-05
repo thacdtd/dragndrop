@@ -63,6 +63,7 @@ $(function() {
             id_tmp = $(objName).attr("id");
             	$("#item_id").val(id_tmp);
             	// $("#name").val($(this).html());
+            	$("#item_code").val($(this).find(".item_code").val());
             	$("#name").val($(this).find(".name").text());
 				$("#DB_table").val($(this).find(".DB_table").val());
 				$("#DB_field").val($(this).find(".DB_field").val());
@@ -77,6 +78,7 @@ $(function() {
 				id_tmp = $(this).attr("id");
 				$("#item_id").val(id_tmp);
 				// $("#name").val($(this).html());
+				$("#item_code").val($(this).find(".item_code").val());
 				$("#name").val($(this).find(".name").text());
 				$("#DB_table").val($(this).find(".DB_table").val());
 				$("#DB_field").val($(this).find(".DB_field").val());
@@ -92,32 +94,32 @@ $(function() {
 			incW = $("div[id="+id_tmp+"]").width();
 				incH = $("div[id="+id_tmp+"]").height();
 			$(window).keydown(function(e){
-					if(e.which === 46){
+					if(e.which === 46 && event.ctrlKey){
 						
 						//it's the delete key!
 						$("div[id="+id_tmp+"]").remove();
 					}
 					
-					if(e.which === 39){
+					if(e.which === 39 && event.ctrlKey){
 						//it's the left arrow key!
 						incW = incW + 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
 						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
-					if(e.which === 37){ 
+					if(e.which === 37 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incW = incW - 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
 						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
 					
-					if(e.which === 38){ 
+					if(e.which === 38 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incH = incH + 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
 						$("#height").val($("div[id="+id_tmp+"]").height());
 					}
-					if(e.which === 40){ 
+					if(e.which === 40 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incH = incH - 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
@@ -137,31 +139,31 @@ $(function() {
                     var incW1 = $(this).width();
             		var incH1 = $(this).height();
 					$(window).keydown(function(e){
-						if(e.which === 46){ 
+						if(e.which === 46 && event.ctrlKey){ 
 							//it's the delete key!
 							$("div[id="+id_tmp+"]").remove();
 						}
 						
-						if(e.which === 39){
+						if(e.which === 39 && event.ctrlKey){
 							//it's the left arrow key!
 							incW1 = incW1 + 1;
 							$("div[id="+id_tmp+"]").css("width", incW1 + "px");
 							$("#width").val($("div[id="+id_tmp+"]").width());
 						}
-						if(e.which === 37){ 
+						if(e.which === 37 && event.ctrlKey){ 
 							//it's the left arrow key!
 							incW1 = incW1 - 1;
 							$("div[id="+id_tmp+"]").css("width", incW1+ "px");
 							$("#width").val($("div[id="+id_tmp+"]").width());
 						}
 						
-						if(e.which === 38){ 
+						if(e.which === 38 && event.ctrlKey){ 
 							//it's the left arrow key!
 							incH1 = incH1 + 1;
 							$("div[id="+id_tmp+"]").css("height", incH1 + "px");
 							$("#height").val($("div[id="+id_tmp+"]").height());
 						}
-						if(e.which === 40){ 
+						if(e.which === 40 && event.ctrlKey){ 
 							//it's the left arrow key!
 							incH1 = incH1 - 1;
 							$("div[id="+id_tmp+"]").css("height", incH1 + "px");
@@ -196,6 +198,7 @@ $(function() {
 	
 $("#set_properties").click(function(){
 	var item_id = $("#item_id").val();
+	$("div[id="+item_id+"]").find(".item_code").val($("#item_code").val());
 	$("div[id="+item_id+"]").find(".name").html($("#name").val());
 	$("div[id="+item_id+"]").css("text-align", $("#align").val());
 	$("div[id="+item_id+"]").css("width", $("#width").val() + "px");
@@ -239,6 +242,7 @@ $(document).keydown(function(event){
                     console.log(pos.top)
                     id_tmp = $(tmp_div).attr("id");
             	$("#item_id").val(id_tmp);
+            	$("#item_code").val($(this).find(".item_code").val());
 				$("#name").val($(this).find(".name").text());
 				$("#DB_table").val($(this).find(".DB_table").val());
 				$("#DB_field").val($(this).find(".DB_field").val());
@@ -252,6 +256,7 @@ $(document).keydown(function(event){
                $(tmp_div).click(function(){
 				//$(objName).focus();
 				id_tmp = $(this).attr("id");
+				$("#item_code").val($(this).find(".item_code").val());
 				$("#name").val($(this).find(".name").text());
 				$("#DB_table").val($(this).find(".DB_table").val());
 				$("#DB_field").val($(this).find(".DB_field").val());
@@ -269,32 +274,32 @@ $(document).keydown(function(event){
 			$(window).keydown(function(e){
 				
 					//id_tmp = $(this).attr("id");	
-					if(e.which === 46){
+					if(e.which === 46 && event.ctrlKey){
 						
 						//it's the delete key!
 						$("div[id="+id_tmp+"]").remove();
 					}
 					
-					if(e.which === 39){
+					if(e.which === 39 && event.ctrlKey){
 						//it's the left arrow key!
 						incW = incW + 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
 						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
-					if(e.which === 37){ 
+					if(e.which === 37 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incW = incW - 1;
 						$("div[id="+id_tmp+"]").css("width", incW + "px");
 						$("#width").val($("div[id="+id_tmp+"]").width());
 					}
 					
-					if(e.which === 38){ 
+					if(e.which === 38 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incH = incH + 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
 						$("#height").val($("div[id="+id_tmp+"]").height());
 					}
-					if(e.which === 40){ 
+					if(e.which === 40 && event.ctrlKey){ 
 						//it's the left arrow key!
 						incH = incH - 1;
 						$("div[id="+id_tmp+"]").css("height", incH + "px");
@@ -359,7 +364,7 @@ $("#export").click(function(){
 	        	var errrrr = 'Erersds';
 		      	alert(errrrr);
 		      },
-            success: function() {
+            success: function() { 
                 alert("Delete successfully!") 	
             }
         });
@@ -380,7 +385,8 @@ $("#export").click(function(){
         		var DB_table = $(this).find(".DB_table").val()
         		var DB_field = $(this).find(".DB_field").val()
         		var count_num = $(this).find(".count_num").val()
-        		_data = _data + name+  ",," + left+  ",,"+ top +  ",," + width +  ",," + height+  ",," + borderTopWidth+  ",," + borderRightWidth+  ",," + borderBottomWidth+  ",," + borderLeftWidth +  ",," + DB_table +  ",," + DB_field+  ",," + count_num;
+        		var item_code = $(this).find(".item_code").val()
+        		_data = _data + name+  ",," + left+  ",,"+ top +  ",," + width +  ",," + height+  ",," + borderTopWidth+  ",," + borderRightWidth+  ",," + borderBottomWidth+  ",," + borderLeftWidth +  ",," + DB_table +  ",," + DB_field+  ",," + count_num + ",," + item_code;
         		
         		$.ajax({
             url: '/file_writes?data=' + _data,
@@ -413,6 +419,7 @@ $("#export").click(function(){
     <!-- end of drag1 -->
     <div id="drag2" class="drag" value="Title">
     	<span class="name">Title</span>
+    	<input type="hidden" class="item_code" value="item_code">
     	<input type="hidden" class="count_num" value="count_num">
     	<input type="hidden" class="DB_table" value="DB_table">
     	<input type="hidden" class="DB_field" value="DB_field">
@@ -421,6 +428,7 @@ $("#export").click(function(){
     
      <div id="drag1" class="drag">
      	<span class="name">label</span>
+     	<input type="hidden" class="item_code" value="item_code">
      	<input type="hidden" class="count_num" value="count_num">
 	     <input type="hidden" class="DB_table" value="DB_table">
 	     <input type="hidden" class="DB_field" value="DB_field">
@@ -428,6 +436,7 @@ $("#export").click(function(){
     
     <div id="drag3" class="drag">
     	<span class="name">Name label</span>
+    	<input type="hidden" class="item_code" value="item_code">
     	<input type="hidden" class="count_num" value="count_num">
     	<input type="hidden" class="DB_table" value="DB_table">
     	<input type="hidden" class="DB_field" value="DB_field">
@@ -435,6 +444,7 @@ $("#export").click(function(){
     <!-- end of drag3 -->
     <div id="drag4" class="drag">
     	<span class="name">Name</span>
+    	<input type="hidden" class="item_code" value="item_code">
     	<input type="hidden" class="count_num" value="count_num">
     	<input type="hidden" class="DB_table" value="DB_table">
     	<input type="hidden" class="DB_field" value="DB_field">
@@ -448,7 +458,9 @@ $("#export").click(function(){
     	</div>
     	<hr />
     	<div>
-    		<label for="item_id">ID</label><input type="text" name="item_id" id="item_id" value="item_id"  style="text-align: right; ">
+    		<label for="item_id">Item code</label>
+    		<input type="hidden" class="item_id" id="item_id" value="item_id">
+    		<input type="text" name="item_code" id="item_code" value="item_code" style="text-align: right; ">
     		<label for="name">Name</label>
     		<input type="text" name="name" id="name" value="name" style="text-align: left; ">
     		<label for="align">Text align</label>
